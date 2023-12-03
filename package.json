@@ -1,0 +1,34 @@
+{
+  "name": "nam-react",
+  "version": "1.0.0",
+  "description": "This is react js basic to advanced topic practice.",
+  "main": "App.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashique2510/Ad-react-js.git"
+  },
+  "keywords": [],
+  "author": "Ashique Mohammed C",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashique2510/Ad-react-js/issues"
+  },
+  "homepage": "https://github.com/ashique2510/Ad-react-js#readme",
+  "devDependencies": {
+    "parcel": "^2.10.2",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0"
+  },
+  "browserslist": [
+    "last 20 versions"
+  ]
+}
