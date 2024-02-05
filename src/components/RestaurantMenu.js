@@ -1,37 +1,49 @@
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { useParams } from "react-router-dom";
+import { MENU_API } from "../../utils/constants";
+import useRestaurantMenu from "../../utils/useRestaurantMenu";
 
 
  const RestaurantMenu = () => {
-   const [resInfo, setResInfo] = useState(null);
+   //const [resInfo, setResInfo] = useState(null);
 
-   useEffect(() => {
-     fetchMenu();
-   }, []);
+   const {resId} = useParams()
+console.log('resId resId', resId);
+const resInfo = useRestaurantMenu(resId);
 
-   const fetchMenu = async () => {
-     const data = await fetch(
-       'https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9351929&lng=77.62448069999999&restaurantId=425&submitAction=ENTER'
-     );
+console.log('resInfo resInfo', resInfo);
 
-     const json = await data.json();
-     setResInfo(json?.data?.cards[0]?.card?.card?.info);
-     console.log('json rest', json?.data?.cards[0]?.card?.card?.info);
-   };
+
+
 
   
- if(resInfo !== null){
-   var { name, cuisines, costForTwoMessage } = resInfo;
-  }
-   console.log('res', resInfo);
+ if(resInfo === null) return <Shimmer />
+  
+   const { name, cuisines, costForTwoMessage } =
+     resInfo?.cards[0]?.card?.card?.info;
 
-   return resInfo === null ? (
-     <Shimmer />
-   ) : (
-     <div>
-       <h1>{name}</h1>
-       <h3 style={{ marginTop: '10px' }}>{cuisines.join(' ,')}</h3>
-       <h3 style={{ marginTop: '10px' }}>{costForTwoMessage}</h3>
+     const { itemCards } = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
+    
+  //   const {statusMessage} = resInfo; 
+
+   return (
+     <div className="w-full flex justify-center mt-10">
+       <div>
+         <h1 style={{ fontSize: '35px', color: 'green' }}>{name}</h1>
+         <h3 style={{ marginTop: '10px', fontSize: '25px', color: 'red' }}>
+           {cuisines.join(' ,')}
+         </h3>
+         <h3 style={{ marginTop: '10px' }}>{costForTwoMessage}</h3>
+         <ul>
+           {itemCards?.map((item) => (
+             <li key={item.card.info.id}>
+               {item.card.info.name} : Rs-
+               {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
+             </li>
+           ))}
+         </ul>
+       </div>
      </div>
    );
  }

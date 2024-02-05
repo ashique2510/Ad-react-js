@@ -1,3 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/*
+*{
+    margin: 5px;
+}
+*/
+/*
 h1,h2,h3,h4,h5,h6 {
   margin: 0;
   padding: 0;
@@ -94,24 +105,25 @@ h1,h2,h3,h4,h5,h6 {
 .cuisine{
     font-weight: 300;
 }
+*/
 
 .shimmer-card{
 
     width: 250px;
-    height: 300px;
+    height: 450px;
     background-color: rgba(128, 128, 128, 0.678);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); 
     border-radius: 7px;
     padding: 6px;
     margin-top: 30px;
     margin-left: 30px;
-
+    
 }
 .shimmer-container {
     display: flex;
     justify-content: start;
     flex-wrap: wrap;
-    padding: 0px 30px; 
+    padding: 0px 90px; 
 }
 .image-box{
     width: 100%;
@@ -124,3 +136,9 @@ h1,h2,h3,h4,h5,h6 {
     height: 12px;
     width: 100%;
 }
+
+/* .user-card {
+    padding: 30px 10px;
+    border: 1px solid black;
+    background-color: rgb(252, 218, 175);
+} */
