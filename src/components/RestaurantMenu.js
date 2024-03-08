@@ -8,24 +8,30 @@ import useRestaurantMenu from "../../utils/useRestaurantMenu";
  const RestaurantMenu = () => {
    //const [resInfo, setResInfo] = useState(null);
 
-   const {resId} = useParams()
-console.log('resId resId', resId);
-const resInfo = useRestaurantMenu(resId);
+   const { resId } = useParams();
+   console.log('resId resId', resId);
+   const resInfo = useRestaurantMenu(resId);
 
-console.log('resInfo resInfo', resInfo);
+   console.log('resInfo resInfo', resInfo);
 
+   if (resInfo === null) return <Shimmer />;
 
-
-
-  
- if(resInfo === null) return <Shimmer />
-  
    const { name, cuisines, costForTwoMessage } =
      resInfo?.cards[0]?.card?.card?.info;
 
-     const { itemCards } = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
-    
-  //   const {statusMessage} = resInfo; 
+   const { itemCards } =
+     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+       ?.card;
+
+    const allItemCategory = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter((item)=> item.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
+
+    console.log('allItemCategory', allItemCategory);
+
+   //   const {statusMessage} = resInfo;
+   console.log(
+     'menuuu',
+     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards
+   );
 
    return (
      <div className="w-full flex justify-center mt-10">

@@ -1,5 +1,5 @@
 import resData from "../../utils/mockData";
-import RestaurantCard, {withPromotedLab} from "./RestaurantCard";
+import RestaurantCard, {withVegLab} from "./RestaurantCard";
 import { useState ,useEffect } from 'react'
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../../utils/useOnlineStatus";
@@ -12,6 +12,8 @@ const Body = () => {
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
   const [heading, setHeading] = useState('')
+
+  const RestCardVegLabel = withVegLab(RestaurantCard);
 
   useEffect(() => {
     setData(restaurantData);
@@ -139,18 +141,31 @@ const Body = () => {
         </h1>
       </div>
       <div className="res-container flex justify-center flex-wrap px-8 py-0">
-        {data?.map((data, index) => (
-          <RestaurantCard
-            key={index}
-            id={data?.info?.id}
-            resName={data?.info?.name}
-            cuisine={data?.info?.cuisines}
-            img={data?.info?.cloudinaryImageId}
-            rating={data?.info?.avgRating}
-            locality={data?.info?.locality}
-            costForTwo={data?.info?.costForTwo}
-          />
-        ))}
+        {data?.map((data, index) =>
+          data?.info?.veg ? (
+            <RestCardVegLabel
+              key={index}
+              id={data?.info?.id}
+              resName={data?.info?.name}
+              cuisine={data?.info?.cuisines}
+              img={data?.info?.cloudinaryImageId}
+              rating={data?.info?.avgRating}
+              locality={data?.info?.locality}
+              costForTwo={data?.info?.costForTwo}
+            />
+          ) : (
+            <RestaurantCard
+              key={index}
+              id={data?.info?.id}
+              resName={data?.info?.name}
+              cuisine={data?.info?.cuisines}
+              img={data?.info?.cloudinaryImageId}
+              rating={data?.info?.avgRating}
+              locality={data?.info?.locality}
+              costForTwo={data?.info?.costForTwo}
+            />
+          )
+        )}
       </div>
     </div>
   );

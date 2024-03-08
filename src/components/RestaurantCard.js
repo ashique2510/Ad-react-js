@@ -31,22 +31,30 @@ const RestaurantCard = ({
 };
 
 
-export const withPromotedLab = (RestaurantCard) => {
+export const withVegLab = (RestaurantCard) => {
 
-   return () => {
-
+   return (props) => {
      return (
-      <div>
-       <label>Promoted</label>  
-       <RestaurantCard />
-      </div>
-     )
-
-   }
+       <div style={{ position: 'relative' }}>
+         <label
+           style={{
+             position: 'absolute',
+             top: '24px',
+             left: '35px',
+             padding: '2px',
+             backgroundColor: 'lightgreen',
+             border: '1px solid green',
+             borderRadius:'5px'
+           }}
+         >
+           Veg: 🥬{' '}
+         </label>
+         <RestaurantCard {...props} />
+       </div>
+     );
+   };
 
 };
-
-
 
 export default RestaurantCard;
 
